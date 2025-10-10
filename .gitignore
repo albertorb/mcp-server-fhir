@@ -1,3 +1,7 @@
+# Epic FHIR MCP Server specific
+.env
+*.pem
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

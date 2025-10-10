@@ -1,0 +1,10 @@
+# Requirements for OpenAI Agent testing with Epic FHIR MCP Server
+# Install with: pip install -r requirements-agent.txt
+
+# OpenAI Agents SDK - for creating AI agents with MCP support
+openai-agents
+
+# The SDK requires these (usually auto-installed, but listed for clarity):
+# - openai (for API calls)
+# - httpx (for HTTP requests)
+# - pydantic (for data validation)
