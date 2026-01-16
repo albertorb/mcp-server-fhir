@@ -8,12 +8,9 @@ A production-ready Model Context Protocol (MCP) server that connects LLMs to Epi
 
 ## Features
 
-- 🔐 **OAuth2 Backend Systems Flow** - Secure server-to-server authentication with JWT
-- 🏥 **Epic FHIR R4 API** - Access patient data, medications, observations, and more
-- 🌊 **Dual Transport** - Stdio for Claude Desktop, Streamable HTTP for web clients
-- 🚀 **Production Ready** - Proper error handling, logging, and token caching
-- 📦 **Simple Setup** - Automated key generation and configuration
-- 🔧 **Type Safe** - Full type hints for better development experience
+- **OAuth2 Backend Systems Flow** - Secure server-to-server authentication with JWT
+- **Epic FHIR R4 API** - Access patient data, medications, observations, and more
+- **Dual Transport** - Stdio for Claude Desktop, Streamable HTTP for web clients
 
 ## Architecture
 
@@ -288,47 +285,6 @@ curl http://localhost:8000/sse
 LOG_LEVEL=DEBUG uv run python src/server.py
 ```
 
-## Security Best Practices
-
-- ✅ Never commit `private_key.pem` or `.env`
-- ✅ Rotate keys every 90 days
-- ✅ Use environment variables for secrets
-- ✅ Enable HTTPS in production
-- ✅ Implement rate limiting for production
-- ✅ Monitor authentication failures
-- ✅ Use separate Epic apps for sandbox/production
-
-## Production Deployment
-
-### Docker
-
-```dockerfile
-FROM python:3.12-slim
-
-WORKDIR /app
-COPY . .
-RUN pip install uv && uv sync
-
-EXPOSE 8000
-CMD ["uv", "run", "python", "src/server.py"]
-```
-
-### Environment Variables
-
-Required in production:
-- `EPIC_CLIENT_ID`
-- `EPIC_PRIVATE_KEY_PATH` (or mount secret)
-- `EPIC_TOKEN_URL`
-- `EPIC_FHIR_BASE_URL`
-
-### Monitoring
-
-Track:
-- Token request success/failure rates
-- FHIR API response times
-- Error types and frequencies
-- Active connections
-
 ## OpenAI Agent Integration
 
 This MCP server can be used with the [OpenAI Agents SDK](https://openai.github.io/openai-agents-python/) to create AI agents that can interact with Epic FHIR data.
@@ -378,39 +334,3 @@ async def main():
 
 asyncio.run(main())
 ```
-
-### Why Streamable HTTP?
-
-Streamable HTTP is the modern MCP transport protocol (introduced March 2025) that replaces SSE:
-- ✅ **Simpler**: Single endpoint for all communication  
-- ✅ **More scalable**: Better for production deployments
-- ✅ **Stateless options**: Easier to deploy across multiple nodes
-- ✅ **Better performance**: More efficient than SSE
-- ✅ **Future-proof**: Recommended by the MCP specification
-
-See [AGENT_README.md](./AGENT_README.md) for detailed agent setup and usage instructions.
-
-## Resources
-
-- **Epic FHIR Documentation**: https://fhir.epic.com/Documentation
-- **MCP Protocol**: https://modelcontextprotocol.io
-- **OpenAI Agents SDK**: https://openai.github.io/openai-agents-python/
-- **FHIR R4 Spec**: http://hl7.org/fhir/R4/
-- **Epic Support**: https://open.epic.com/Home/Contact
-
-## License
-
-MIT License - see LICENSE file for details
-
-## Contributing
-
-Contributions welcome! Please:
-1. Fork the repository
-2. Create a feature branch
-3. Add tests for new functionality
-4. Submit a pull request
-
----
-
-**Built with ❤️ for healthcare interoperability**
-
